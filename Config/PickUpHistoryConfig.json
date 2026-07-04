@@ -1,0 +1,45 @@
+{
+	"x": 400,
+	"y": 0,
+	"background": true,
+	"backgroundColor": "0x111111",
+	"textSize": 18,
+	"textAlign": "left", // left, center, right
+	"textColor": "0xaaffaa",
+	"textShadow": true,
+//	Some of the working fonts:
+//	"$76HandwrittenNeat_Font", "$76HandwrittenIlliterate", "$BerlinDemi", "$BRODY",
+//	"$Brush_Script_Std", "$ChowderHead", "$ConsoleFont", "$DebugTextFont", "$DotMatrix_Font",
+//	"$evaScript_Font", "$Futura_Bold", "$HandwrittenFont", "$KiddieCocktails", "$Leiascript_Font",
+//	"$MAIN_Font", "$MAIN_Font_Bold", "$MAIN_Font_Light", "$NixieTube_Font", "$Portico_Font_Regular",
+//	"$Slate_Mobile", "$Terminal_Font", "$Typewriter_Font" 
+	"textFont": "$MAIN_Font_Bold",
+	
+//	alpha values:
+//	0 = loads default value
+//	0.0001 = transparent
+//	0.0 < value < 1.0 = semi-transparent
+//	1.0 = opaque
+//	HUD Opacity in settings can be changed so value of "alpha" can go over 1.0
+	"alpha": 1,
+	
+//	Possible HUD Modes:
+//	"ActivateTypeMode", "All", "AutoVanity", "CampPlacement", "ContainerMode", "CrosshairAndActivateOnly",
+//	"DeathRespawnMode", "DefaultScopeMenu", "DialogueMode", "EndOfMatch", "ExamineConfirmMode", "Fishing",
+//	"FurnitureEnterExit", "InsideMemory", "InspectMode", "IronSights", "LegendaryPerksMode", "LockpickingMode",
+//	"MapMenu", "MessageMode", "MovementDisabled", "NoHud", "PauseMode", "PerksMode", "Pipboy", "PowerArmor",
+//	"RadialMenu", "ScopeMenu", "SelfieMode", "SitWaitMode", "SpectatorMode", "TerminalMode", "VATS",
+//	"VATSPlayback", "VertibirdMode", "WorkshopMode"
+//	"All" is default HUD mode (non-power armor), not all of them
+	"HUDModesState": "hidden", // hidden, shown
+	"HUDModes": [
+	],
+	
+	"debug": false,
+	
+	"format": "[{pickedUpCount}] picked up | {lastPickedUpItemName} ({lastPickedUpItemCount})",
+	
+	"ignoreItemPickups": [
+		"dirty water", "toxic water", "toxic goo"
+	]
+}
