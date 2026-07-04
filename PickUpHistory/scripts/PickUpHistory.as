@@ -23,7 +23,7 @@ package
       
       public static const MOD_NAME:String = "PickUpHistory";
       
-      public static const MOD_VERSION:String = "1.0.0";
+      public static const MOD_VERSION:String = "1.0.1";
       
       public static const FULL_MOD_NAME:String = MOD_NAME + " " + MOD_VERSION;
       
@@ -450,12 +450,9 @@ package
                len = inv.length;
                debug = Boolean(config) && Boolean(config.debug);
                isCountPickups = t1 > 30000;
-               if(isCountPickups)
+               if(isCountPickups && (this.isInWorkbenchMenu || this.isInStashMenu || this.isPreviousStashMenu))
                {
-                  if(this.isInWorkbenchMenu || this.isInStashMenu || this.isPreviousStashMenu)
-                  {
-                     isCountPickups = false;
-                  }
+                  isCountPickups = false;
                }
                i = 0;
                if(!isCountPickups)
@@ -524,16 +521,7 @@ package
                this.display_tf.text = this.displayText.replace(STRING_PICKED_UP_COUNT,this.pickUpHistory);
                if(debug)
                {
-                  this.display_tf.text += "\nProcessingTime: " + this.lastProcessingTime + "ms @" + int(this.elapsedTime) + "s\n";
-                  this.display_tf.text += "isInActivateMenu: " + this.isInActivateMenu + "\n";
-                  this.display_tf.text += "isInWorkbenchMenu: " + this.isInWorkbenchMenu + "\n";
-                  this.display_tf.text += "isInStashMenu: " + this.isInStashMenu + "\n";
-                  this.display_tf.text += "isPreviousStashMenu: " + this.isPreviousStashMenu + "\n";
-                  this.display_tf.text += "hudMode: " + this.hudMode + "\n";
-                  this.display_tf.text += "previousHudMode: " + this.previousHudMode + "\n";
-                  this.display_tf.text += "containerName: " + this.containerName + "\n";
-                  this.display_tf.text += "lastContainerName: " + this.lastContainerName + "\n";
-                  this.display_tf.text += "isQuickContainerVisible: " + this.isQuickContainerVisible + "\n";
+                  this.display_tf.text += "\nProcessingTime: " + this.lastProcessingTime + "ms @" + int(this.elapsedTime) + "s\nisInActivateMenu: " + this.isInActivateMenu + "\nisInWorkbenchMenu: " + this.isInWorkbenchMenu + "\nisInStashMenu: " + this.isInStashMenu + "\nisPreviousStashMenu: " + this.isPreviousStashMenu + "\nhudMode: " + this.hudMode + "\npreviousHudMode: " + this.previousHudMode + "\ncontainerName: " + this.containerName + "\nlastContainerName: " + this.lastContainerName + "\nisQuickContainerVisible: " + this.isQuickContainerVisible + "\n";
                }
             }
          }
