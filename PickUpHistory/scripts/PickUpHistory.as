@@ -101,8 +101,6 @@ package
       
       private var lastContainerName:String = "";
       
-      private var quickContainer_tf:*;
-      
       public function PickUpHistory()
       {
          super();
@@ -366,6 +364,11 @@ package
          return (getTimer() - this.lastConfigUpdateTime) / 1000;
       }
       
+      public function get isInBookMenu() : Boolean
+      {
+         return this.HUDModeData.data.hudMode == "BookMode";
+      }
+      
       public function get isInWorkbenchMenu() : Boolean
       {
          return this.HUDModeData.data.hudMode == HUDModes.INSPECT_MODE;
@@ -450,7 +453,7 @@ package
                len = inv.length;
                debug = Boolean(config) && Boolean(config.debug);
                isCountPickups = t1 > 30000;
-               if(isCountPickups && (this.isInWorkbenchMenu || this.isInStashMenu || this.isPreviousStashMenu))
+               if(isCountPickups && (this.isInWorkbenchMenu || this.isInStashMenu || this.isPreviousStashMenu || this.isInBookMenu))
                {
                   isCountPickups = false;
                }
