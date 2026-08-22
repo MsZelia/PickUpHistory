@@ -279,25 +279,31 @@ package
             loaderComplete = function(param1:Event):void
             {
                var jsonData:Object;
+               var line:uint;
                try
                {
                   if(lastConfig != loader.data)
                   {
-                     jsonData = new JSONDecoder(loader.data,true).getValue();
+                     jsonData = new JSONDecoder(loader.data,false).getValue();
                      PickUpHistoryConfig.init(jsonData);
                      initTextField();
                      lastConfigUpdateTime = getTimer();
                      lastConfig = loader.data;
                   }
                }
+               catch(e:JSONParseError)
+               {
+                  line = e.text.substr(0,e.location).match(/\n/g).length + 1;
+                  ShowHUDMessage("Error parsing config: " + e.message + " in line " + line);
+               }
                catch(e:Error)
                {
-                  ShowHUDMessage("Error parsing config: " + e);
+                  ShowHUDMessage("Error initializing config: " + e);
                }
             };
-            ioErrorHandler = function(param1:*):void
+            ioErrorHandler = function(e:IOErrorEvent):void
             {
-               ShowHUDMessage("Error loading config: " + param1.text);
+               ShowHUDMessage("Error loading config: " + e.text);
             };
             url = new URLRequest(CONFIG_FILE);
             loader = new URLLoader();
