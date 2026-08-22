@@ -372,17 +372,17 @@ package
       
       public function get isInBookMenu() : Boolean
       {
-         return this.HUDModeData.data.hudMode == "BookMode";
+         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == "BookMode";
       }
       
       public function get isInWorkbenchMenu() : Boolean
       {
-         return this.HUDModeData.data.hudMode == HUDModes.INSPECT_MODE;
+         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == HUDModes.INSPECT_MODE;
       }
       
       public function get isInStashMenu() : Boolean
       {
-         return this.HUDModeData.data.hudMode == HUDModes.CONTAINER_MODE;
+         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == HUDModes.CONTAINER_MODE;
       }
       
       public function get isPreviousStashMenu() : Boolean
@@ -392,12 +392,12 @@ package
       
       public function get isInActivateMenu() : Boolean
       {
-         return this.HUDModeData.data.hudMode == HUDModes.ACTIVATE_TYPE;
+         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == HUDModes.ACTIVATE_TYPE;
       }
       
       public function get isInPipboyMenu() : Boolean
       {
-         return this.HUDModeData.data.hudMode == HUDModes.PIPBOY;
+         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == HUDModes.PIPBOY;
       }
       
       public function get containerName() : String
@@ -457,7 +457,7 @@ package
          var newItems:Array = [];
          try
          {
-            if(event.data != null && event.data.InventoryList != null)
+            if(event && event.data && event.data.InventoryList)
             {
                t1 = Number(getTimer());
                inv = event.data.InventoryList;
