@@ -395,6 +395,11 @@ package
          return this.HUDModeData.data.hudMode == HUDModes.ACTIVATE_TYPE;
       }
       
+      public function get isInPipboyMenu() : Boolean
+      {
+         return this.HUDModeData.data.hudMode == HUDModes.PIPBOY;
+      }
+      
       public function get containerName() : String
       {
          try
@@ -459,7 +464,7 @@ package
                len = inv.length;
                debug = Boolean(config) && Boolean(config.debug);
                isCountPickups = t1 > 30000;
-               if(isCountPickups && (this.isInWorkbenchMenu || this.isInStashMenu || this.isPreviousStashMenu || this.isInBookMenu))
+               if(isCountPickups && (this.isInPipboyMenu || this.isInWorkbenchMenu || this.isInStashMenu || this.isPreviousStashMenu || this.isInBookMenu))
                {
                   isCountPickups = false;
                }
