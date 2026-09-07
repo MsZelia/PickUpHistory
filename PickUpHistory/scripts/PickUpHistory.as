@@ -23,7 +23,7 @@ package
       
       public static const MOD_NAME:String = "PickUpHistory";
       
-      public static const MOD_VERSION:String = "1.0.1";
+      public static const MOD_VERSION:String = "1.0.2";
       
       public static const FULL_MOD_NAME:String = MOD_NAME + " " + MOD_VERSION;
       
@@ -372,17 +372,17 @@ package
       
       public function get isInBookMenu() : Boolean
       {
-         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == "BookMode";
+         return Boolean(this.HUDModeData.data) && Boolean(this.HUDModeData.data.hudMode) && this.HUDModeData.data.hudMode == "BookMode";
       }
       
       public function get isInWorkbenchMenu() : Boolean
       {
-         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == HUDModes.INSPECT_MODE;
+         return Boolean(this.HUDModeData.data) && Boolean(this.HUDModeData.data.hudMode) && this.HUDModeData.data.hudMode == HUDModes.INSPECT_MODE;
       }
       
       public function get isInStashMenu() : Boolean
       {
-         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == HUDModes.CONTAINER_MODE;
+         return Boolean(this.HUDModeData.data) && Boolean(this.HUDModeData.data.hudMode) && this.HUDModeData.data.hudMode == HUDModes.CONTAINER_MODE;
       }
       
       public function get isPreviousStashMenu() : Boolean
@@ -392,12 +392,12 @@ package
       
       public function get isInActivateMenu() : Boolean
       {
-         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == HUDModes.ACTIVATE_TYPE;
+         return Boolean(this.HUDModeData.data) && Boolean(this.HUDModeData.data.hudMode) && this.HUDModeData.data.hudMode == HUDModes.ACTIVATE_TYPE;
       }
       
       public function get isInPipboyMenu() : Boolean
       {
-         return Boolean(this.HUDModeData.data) && this.HUDModeData.data.hudMode == HUDModes.PIPBOY;
+         return Boolean(this.HUDModeData.data) && Boolean(this.HUDModeData.data.hudMode) && this.HUDModeData.data.hudMode == HUDModes.PIPBOY;
       }
       
       public function get containerName() : String
@@ -414,7 +414,14 @@ package
       
       public function get isQuickContainerVisible() : Boolean
       {
-         return this.topLevel.CenterGroup_mc.QuickContainerWidget_mc.visible;
+         try
+         {
+            return this.topLevel.CenterGroup_mc.QuickContainerWidget_mc.visible;
+         }
+         catch(error:*)
+         {
+         }
+         return false;
       }
       
       public function updateVisibility(event:*) : void
