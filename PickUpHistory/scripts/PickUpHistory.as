@@ -33,6 +33,8 @@ package
       
       private static const TITLE_HUDMENU:String = "HUDMenu";
       
+      private static const HUDTOOLS_MENU_TOGGLE_VISIBILITY:String = MOD_NAME + "_TOGGLE_VISIBILITY";
+      
       private static const HUDTOOLS_MENU_HIDE:String = MOD_NAME + "_HIDE";
       
       private static const HUDTOOLS_MENU_RESET_HISTORY:String = MOD_NAME + "_RESET_HISTORY";
@@ -80,6 +82,8 @@ package
       private var lastConfigUpdateTime:Number = 0;
       
       private var lastProcessingTime:Number = 0;
+      
+      private var toggleVisibility:Boolean = false;
       
       private var forceHide:Boolean = false;
       
@@ -179,6 +183,7 @@ package
                   this.hudTools.AddMenuItem(HUDTOOLS_MENU_INCREASE_COUNTER,"Increase counter",true,true,250);
                }
                this.hudTools.AddMenuItem(HUDTOOLS_MENU_RESET_HISTORY,"Reset counter",true,false,250);
+               this.hudTools.AddMenuItem(HUDTOOLS_MENU_TOGGLE_VISIBILITY,"Toggle Visible",true,false,250);
                this.hudTools.AddMenuItem(HUDTOOLS_MENU_HIDE,"Force Hide",true,false,250);
             }
             else if(parentItem == HUDTOOLS_MENU_INCREASE_COUNTER)
@@ -211,7 +216,12 @@ package
             if(selectItem == HUDTOOLS_MENU_HIDE)
             {
                this.forceHide = !this.forceHide;
-               this.updateVisibility(this.HUDModeData);
+               this.updateVisibility();
+            }
+            else if(selectItem == HUDTOOLS_MENU_TOGGLE_VISIBILITY)
+            {
+               this.toggleVisibility = !this.toggleVisibility;
+               this.updateVisibility();
             }
             else if(selectItem == HUDTOOLS_MENU_RESET_HISTORY)
             {
@@ -424,7 +434,7 @@ package
          return false;
       }
       
-      public function updateVisibility(event:*) : void
+      public function updateVisibility() : void
       {
          try
          {
@@ -441,7 +451,7 @@ package
             {
                this.lastContainerName = "";
             }
-            this.visible = !this.forceHide && this.isValidHUDMode();
+            this.visible = !this.forceHide && Boolean(this.isValidHUDMode() ^ this.toggleVisibility);
             this.updateInventory(this.PlayerInventoryData);
          }
          catch(error:*)
@@ -548,7 +558,10 @@ package
          }
          catch(error:*)
          {
-            ShowHUDMessage("Error updateInventory: " + error);
+            if(getTimer() > 30000)
+            {
+               ShowHUDMessage("Error updateInventory: " + error);
+            }
          }
       }
       
